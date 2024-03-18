@@ -1,0 +1,67 @@
+.container {
+  /* margin-top: 12px; */
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+css.icon {
+  color: red;
+}
+
+.btn {
+  margin-left: 0px;
+  margin-right: auto;
+  background-color: transparent;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: 1px solid lightslategray;
+}
+.btn:hover,
+.btn:focus {
+  background-color: lightgray;
+  outline: none;
+  border: 1px solid lightslategray;
+}
+.movieCard {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+.moviePoster {
+  border-radius: 6px;
+}
+.movieInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.movieInfo li {
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  text-wrap: wrap;
+}
+.title b {
+  font-size: 25px;
+}
+.subPageContainer {
+  padding-left: 42px;
+}
+.subPageContainer li:hover,
+.subPageContainer li:focus {
+  text-decoration: underline;
+  color: orangered;
+}
+.btnText {
+  color: black;
+}
+.btnText:hover,
+.btnText:focus {
+  color: black;
+}

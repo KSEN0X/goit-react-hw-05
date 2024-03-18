@@ -1,0 +1,26 @@
+.moviesList {
+  margin-left: 24px;
+  margin-top: 12px;
+  list-style-type: disc;
+}
+.moviesItem {
+  font-size: 12px;
+}
+.moviesItem:hover,
+.moviesItem:focus {
+  text-decoration: underline;
+  color: orangered;
+}
+
+/* .link {
+  text-decoration: none;
+  color: black;
+}
+
+.link:hover,
+.link:focus {
+  text-decoration: underline;
+}
+.isActive {
+  color: orangered;
+} */

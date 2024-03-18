@@ -1,0 +1,14 @@
+.container {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-left: 12px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+}
+.card img {
+  border-radius: 6px;
+}
