@@ -26,6 +26,8 @@ export default function MoviesPage() {
       toast.error('Please enter text to search movies!');
       return;
     }
+
+    // Change the order of actions to avoid race conditions
     setSearchParams({ query: value });
     setValue('');
   };
@@ -39,6 +41,8 @@ export default function MoviesPage() {
         if (data.results.length === 0) {
           alert(`Sorry, no movies found by query: ${query}`);
           toast.error('Please try another query!');
+          setError(true); // Update error state in case of no results
+          setMovies([]); // Set movies to empty array
           return;
         }
         setMovies(data.results);
@@ -71,7 +75,7 @@ export default function MoviesPage() {
       />
       {isLoading && <b>Loading search movies...</b>}
       {error && <b>HTTP error!🤔</b>}
-      <MovieList movies={movies} />
+      {movies.length > 0 && <MovieList movies={movies} />} {/* Render MovieList only when there are movies */}
     </div>
   );
 }
