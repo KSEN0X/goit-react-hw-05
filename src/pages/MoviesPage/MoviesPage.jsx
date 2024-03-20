@@ -12,7 +12,7 @@ export default function MoviesPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [value, setValue] = useState('');
-  // URLSearchParams.get(key), wait for 'key', return  value або null
+ 
   const query = searchParams.get('query') ?? '';
 
  
@@ -42,6 +42,7 @@ export default function MoviesPage() {
           return;
         }
         setMovies(data.results);
+        setError(false);
       } catch (error) {
         setError(true);
         console.error(error);
@@ -54,7 +55,7 @@ export default function MoviesPage() {
   }, [query]);
 
  
-  const changeMovieFilter = e => {
+  const changeMovieFilter = (e) => {
     setValue(e.target.value);
   };
 
@@ -73,7 +74,7 @@ export default function MoviesPage() {
       />
       {isLoading && <b>Loading search movies...</b>}
       {error && <b>HTTP error!🤔</b>}
-      <MovieList movies={filteredMovies} />
+      {filteredMovies.length > 0 && <MovieList movies={filteredMovies} />}
     </div>
   );
 }
