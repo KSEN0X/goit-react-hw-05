@@ -8,15 +8,18 @@ import SearchForm from '../../components/SearchForm/SearchForm';
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [value, setValue] = useState('');
- 
-  const query = searchParams.get('query') ?? '';
+  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
 
- 
-  const onFormSubmit = e => {
+  useEffect(() => {
+    const queryFromParams = searchParams.get('query') ?? '';
+    setQuery(queryFromParams);
+  }, [searchParams]);
+
+  const onFormSubmit = async (e) => {
     e.preventDefault();
     if (value === '') {
       alert("Can't find movies while input field is empty");
@@ -24,20 +27,17 @@ export default function MoviesPage() {
       return;
     }
     setSearchParams({ query: value });
-    setValue(''); 
+    setValue('');
   };
 
   useEffect(() => {
-    if (!query) {
-      return;
-    }
     async function getData() {
       try {
         setIsLoading(true);
         const data = await searchMovies(query);
 
-        if (data.results.length == 0) {
-          alert(`Sorry don't found any by query: ${query}`);
+        if (data.results.length === 0) {
+          alert(`Sorry, no movies found by query: ${query}`);
           toast.error('Please try another query!');
           return;
         }
@@ -51,18 +51,15 @@ export default function MoviesPage() {
         setIsLoading(false);
       }
     }
-    getData();
+
+    if (query) {
+      getData();
+    }
   }, [query]);
 
- 
   const changeMovieFilter = (e) => {
     setValue(e.target.value);
   };
-
-  
-  const filteredMovies = movies.filter(movie =>
-    movie.title.toLowerCase().includes(query.toLowerCase())
-  );
 
   return (
     <div className={css.container}>
@@ -74,7 +71,7 @@ export default function MoviesPage() {
       />
       {isLoading && <b>Loading search movies...</b>}
       {error && <b>HTTP error!🤔</b>}
-      {filteredMovies.length > 0 && <MovieList movies={filteredMovies} />}
+      <MovieList movies={movies} />
     </div>
   );
 }
